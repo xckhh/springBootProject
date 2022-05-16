@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=绑定一个对应的Dao/mapper接口-->
+<mapper namespace="com.cc.dao.AlbumDao">
+    <!--  新建相册  -->
+    <insert id="insertAlbum" parameterType="album">
+        insert into album(album_name,
+        <if test="album_description !=null and album_description != ''">album_description,</if>
+        photo_time,jurisdiction,id,cover) values (#{album_name},
+        <if test="album_description !=null and album_description != ''">#{album_description},</if>
+        #{photo_time},#{jurisdiction},#{id},#{cover})
+    </insert>
+    <!--  获取相册集合  -->
+    <select id="getAlbumList" resultType="album">
+        select * from album where id=#{id}
+    </select>
+    <!--  获取相册id  -->
+    <select id="getAlbumId" resultType="int">
+        select album_id from album where id=#{id}
+    </select>
+</mapper>

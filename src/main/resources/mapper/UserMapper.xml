@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=绑定一个对应的Dao/mapper接口-->
+<mapper namespace="com.cc.dao.UserDao">
+    <!--  登录  -->
+    <select id="login" resultType="user">
+        select * from user where username=#{username} and password=#{password}
+    </select>
+    <!--  注册  -->
+    <insert id="register" parameterType="registerVo">
+        insert into user(id,username,password,phone,name, age,gender,birthday,region) values
+        (#{id},#{username},#{password},#{phone},#{name},#{age},#{gender},#{birthday},#{region})
+    </insert>
+    <!--  修改用户信息  -->
+    <update id="updateUserInfo" parameterType="user">
+        update user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="height != null and height != ''">
+                height = #{height},
+            </if>
+            <if test="weight != null and weight != ''">
+                weight = #{weight},
+            </if>
+            <if test="photo != null and photo != ''">
+                photo = #{photo},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+    <!--  获取用户信息  -->
+    <select id="getUserById" resultType="user">
+        select * from user where id=#{id}
+    </select>
+    <!--  获取全部用户信息  -->
+    <select id="getUserList" resultType="user">
+        select * from user
+    </select>
+    <!--  验证用户名是否存在  -->
+    <select id="isUsername" resultType="user">
+        select * from user where username=#{username}
+    </select>
+
+</mapper>

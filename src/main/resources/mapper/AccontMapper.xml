@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=绑定一个对应的Dao/mapper接口-->
+<mapper namespace="com.cc.dao.AccontDao">
+    <!--  账号信息插入  -->
+    <insert id="accontInsert" parameterType="accont">
+        insert into account(nickname,register_time,login_time,login_address,head_path,id) values
+        (#{nickname},#{register_time},#{login_time},#{login_address},#{head_path},#{id})
+    </insert>
+    <!--  查询账号信息  -->
+    <select id="getAccont" resultType="accont">
+        select * from account where id=#{id}
+    </select>
+    <!--  修改信息  -->
+    <update id="updateAccontInfo" parameterType="accont">
+        update account
+        <trim prefix="set" suffixOverrides=",">
+        <if test="nickname != null and nickname != ''">
+            nickname = #{nickname},
+        </if>
+        <if test="login_time != null">
+            login_time = #{login_time},
+        </if>
+        </trim>
+        where id=#{id}
+
+    </update>
+</mapper>

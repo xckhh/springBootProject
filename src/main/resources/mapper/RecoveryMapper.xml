@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=绑定一个对应的Dao/mapper接口-->
+<mapper namespace="com.cc.dao.RecoveryDao">
+    <!--  获取回收站数据  -->
+    <select id="getPhotoList" resultType="com.cc.pojo.Photo">
+        select * from recovery
+    </select>
+
+    <insert id="addPhoto" parameterType="com.cc.pojo.Photo">
+        insert into recovery(photo_id,album_id,photo_path) values (#{photo_id},#{album_id},#{photo_path})
+    </insert>
+
+    <delete id="recoveryPhoto">
+        delete from recovery where photo_id=#{photo_id}
+    </delete>
+</mapper>

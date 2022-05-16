@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=绑定一个对应的Dao/mapper接口-->
+<mapper namespace="com.cc.dao.ConditionDao">
+    <!--  注册的时候  -->
+    <insert id="insertId">
+        insert into conditions(id) values (#{id})
+    </insert>
+    <!--  获取信息  -->
+    <select id="getPersonal" resultType="conditions">
+        select * from conditions where id=#{id}
+    </select>
+    <!--  修改个人简介  -->
+    <update id="updateCondition" parameterType="com.cc.pojo.Conditions">
+        update conditions
+        <trim prefix="set" suffixOverrides=",">
+            <if test="monthly_income!=null and monthly_income!=''">
+                monthly_income = #{monthly_income},
+            </if>
+            <if test="car_number!=null and car_number!=''">
+                car_number = #{car_number},
+            </if>
+            <if test="house_number!=null and house_number!=''">
+                house_number = #{house_number},
+            </if>
+            <if test="work_type!=null and work_type!=''">
+                work_type = #{work_type},
+            </if>
+            <if test="marital_status!=null and marital_status!=''">
+                marital_status = #{marital_status},
+            </if>
+            <if test="hobby!=null and hobby!=''">
+                hobby = #{hobby},
+            </if>
+            <if test="requirement!=null and requirement!=''">
+                requirement = #{requirement},
+            </if>
+            <if test="personal_signature!=null and personal_signature!=''">
+                personal_signature = #{personal_signature},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+    <!--  修改爱好  -->
+    <update id="updateHobby">
+        update conditions set hobby=#{hobby} where id=#{id}
+    </update>
+</mapper>

@@ -1,0 +1,17 @@
+server:
+  port: 8099
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blinddate?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+  resources:
+    static-locations: file:D:/桌面文件夹/学习/springBootProject/src/main/resources/static/images/
+  mvc:
+    static-path-pattern: /images/**
+mybatis:
+  type-aliases-package: com.cc.pojo
+  mapper-locations: classpath:/mapper/*.xml
+

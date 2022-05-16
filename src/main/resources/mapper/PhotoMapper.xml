@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=绑定一个对应的Dao/mapper接口-->
+<mapper namespace="com.cc.dao.PhotoDao">
+    <!--  上传照片  -->
+    <insert id="insertPhoto" parameterType="com.cc.pojo.Photo">
+        insert into photo(
+        <if test="photo_id != 0">
+            photo_id,
+        </if>
+        photo_path,album_id) values (
+        <if test="photo_id != 0">
+            #{photo_id},
+        </if>
+        #{photo_path},#{album_id})
+    </insert>
+    <!--  获取照片集合  -->
+    <select id="getPhotoList" resultType="com.cc.pojo.Photo">
+        select * from photo where album_id=#{album_id}
+    </select>
+
+    <delete id="deletePhoto">
+        delete from photo where photo_id=#{photo_id}
+    </delete>
+</mapper>
