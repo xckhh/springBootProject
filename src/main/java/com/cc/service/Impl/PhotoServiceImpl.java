@@ -27,7 +27,7 @@ public class PhotoServiceImpl implements PhotoService {
 
     // 获取照片集合
     public ResultVo getPhotoList(String album_id){
-        ResultVo resultVo = new ResultVo();
+        ResultVo<List<Photo>> resultVo = new ResultVo<>();
         Meta meta = new Meta();
         List<Photo> photoList = photoDao.getPhotoList(album_id);
         if (photoList.size()>0){

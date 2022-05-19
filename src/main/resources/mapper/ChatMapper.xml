@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace=绑定一个对应的Dao/mapper接口-->
+<mapper namespace="com.cc.dao.ChatDao">
+    <!--  获取两个用户之间的聊天记录  -->
+    <select id="getUserChat" resultType="com.cc.pojo.Chat">
+        select * from chat where username=#{username} and another_username=#{another_username}
+    </select>
+    <!--  存储聊天记录  -->
+    <insert id="insertUserChat">
+        insert into chat(username,another_username,date,text,isRead)
+        values
+        <foreach collection="charList" item="chat" separator=",">
+            (    #{chat.username},#{chat.another_username},#{chat.date},#{chat.text},#{chat.isRead}   )
+        </foreach>
+    </insert>
+    <!--  获取未读消息  -->
+    <select id="getMyMsg" resultType="com.cc.pojo.Chat">
+        SELECT chat.username,chat.another_username,chat.date,chat.text,user.photo FROM chat,`user` WHERE chat.username=#{username}  and
+        chat.isRead=0 and user.username=chat.another_username
+    </select>
+
+    <update id="updateIsRead">
+        update chat set isRead=1 where username=#{username}
+    </update>
+</mapper>

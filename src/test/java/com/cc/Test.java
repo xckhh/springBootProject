@@ -1,24 +1,28 @@
 package com.cc;
 
-import com.cc.dao.AccontDao;
+import com.cc.dao.ChatDao;
 import com.cc.dao.ConditionDao;
+import com.cc.dao.PhotoDao;
+import com.cc.pojo.Chat;
+import com.cc.pojo.Photo;
 import com.cc.pojo.Result;
-import com.cc.pojo.ResultCode;
-import com.cc.pojo.User;
-import com.cc.utils.Rules;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 
 public class Test {
     @Autowired
-    private ConditionDao dao;
+    private PhotoDao dao;
 
     @org.junit.Test
     public void test() {
-        Result.success();
-//        System.out.println(ResultCode.RC100.getCode());
+//        dao.insertUserChat(chatList);
+//        for (Chat chat : chatList) {
+//            System.out.println(chat);
+//        }
     }
 
 }
